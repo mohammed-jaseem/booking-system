@@ -58,7 +58,7 @@ WSGI_APPLICATION = 'events_booking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'booking',
+        'NAME':'bookings',
         'HOST':'localhost',
         'USER':'jaseem',
         'PASSWORD':'1234',
@@ -100,6 +100,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL ='users.User'
-# AUTH_PROFILE_MODULE ='users.User'
+AUTH_USER_MODEL ='users.User'
+AUTH_PROFILE_MODULE ='users.User'
 

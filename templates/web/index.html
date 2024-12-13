@@ -1,0 +1,180 @@
+{% extends 'base/web-base.html' %}
+
+{% block container %}
+
+{% load static %}
+
+{% include 'include/header.html' %}
+
+<section class="relative h-screen overflow-hidden">
+    <div id="slider" class="w-full h-full relative overflow-hidden">
+        <div class="slider-items flex transition-transform duration-500 ease-in-out">
+            <!-- Slide 1 -->
+            <div class="w-full flex-shrink-0 h-screen bg-cover bg-center"
+                 style="background-image: url('{% static 'images/slide1.jpg' %}');">
+                <div class="h-full w-full bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+                    <h2 class="text-4xl font-bold mb-2">Discover Amazing Events</h2>
+                    <p class="text-lg">Join the best events in town with ease!</p>
+                </div>
+            </div>           
+            <!-- Slide 2 -->
+            <div class="w-full flex-shrink-0 h-screen bg-cover bg-center" 
+                 style="background-image: url('{% static 'images/slide2.jpg' %}');">
+                <div class="h-full w-full bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+                    <h2 class="text-4xl font-bold mb-2">Create Your Own Events</h2>
+                    <p class="text-lg">Host events and share unforgettable moments!</p>
+                </div>
+            </div>           
+            <!-- Slide 3 -->
+            <div class="w-full flex-shrink-0 h-screen bg-cover bg-center"
+                 style="background-image: url('{% static 'images/slide3.jpg' %}');">
+                <div class="h-full w-full bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+                    <h2 class="text-4xl font-bold mb-2">Book Events Instantly</h2>
+                    <p class="text-lg">Secure your spot with just a few clicks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <section class="py-16 bg-white text-center">
+        <h2 class="text-3xl font-bold mb-6">Featured Events</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8">
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <img src="{% static 'images/bg3.jpg' %}" alt="Event 1" class="rounded-t-lg mb-4">
+                <h3 class="text-xl font-bold mb-2">Event Title 1</h3>
+                <p class="text-gray-600">Short description of the event.</p>
+                <a href="#" 
+                   class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+                   Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h2 class="text-3xl font-bold mb-6">What People Are Saying</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-600">"This platform made event planning so easy! Highly recommended."</p>
+                        <h4 class="text-lg font-bold mt-4">- User 1</h4>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+                <form action="#" method="POST" class="space-y-4">
+                    {% csrf_token %}
+                    <div>
+                        <label for="name" class="block text-gray-700 font-bold">Name</label>
+                        <input type="text" id="name" name="name" required
+                               class="w-full border rounded py-2 px-3 text-gray-700 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 font-bold">Email</label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full border rounded py-2 px-3 text-gray-700 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700 font-bold">Message</label>
+                        <textarea id="message" name="message" rows="4" required
+                                  class="w-full border rounded py-2 px-3 text-gray-700 focus:outline-none"></textarea>
+                    </div>
+                    <button type="submit"
+                            class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-700 transition">
+                        Send
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+<footer class="bg-purple-900 text-white py-8 mt-[150px]">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Use Eventbrite</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">Create Events</a></li>
+          <li><a href="#" class="hover:underline">Pricing</a></li>
+          <li><a href="#" class="hover:underline">Event Marketing Platform</a></li>
+          <li><a href="#" class="hover:underline">Eventbrite Mobile Ticket App</a></li>
+          <li><a href="#" class="hover:underline">Eventbrite Check-In App</a></li>
+          <li><a href="#" class="hover:underline">Event Registration Software</a></li>
+          <li><a href="#" class="hover:underline">Community Guidelines</a></li>
+          <li><a href="#" class="hover:underline">FAQs</a></li>
+          <li><a href="#" class="hover:underline">Sitemap</a></li>
+        </ul>
+      </div>
+  
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Plan Events</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">Sell Tickets Online</a></li>
+          <li><a href="#" class="hover:underline">Event Planning</a></li>
+          <li><a href="#" class="hover:underline">Sell Concert Tickets Online</a></li>
+          <li><a href="#" class="hover:underline">Event Payment System</a></li>
+          <li><a href="#" class="hover:underline">Solutions for Professional Services</a></li>
+          <li><a href="#" class="hover:underline">Halloween Party Planning</a></li>
+          <li><a href="#" class="hover:underline">Virtual Events Platform</a></li>
+          <li><a href="#" class="hover:underline">QR Codes for Event Check-In</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Find Events</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">New Orleans Food & Drink Events</a></li>
+          <li><a href="#" class="hover:underline">San Francisco Holiday Events</a></li>
+          <li><a href="#" class="hover:underline">Tulum Music Events</a></li>
+          <li><a href="#" class="hover:underline">Denver Hobby Events</a></li>
+          <li><a href="#" class="hover:underline">Atlanta Pop Music Events</a></li>
+          <li><a href="#" class="hover:underline">New York Events</a></li>
+          <li><a href="#" class="hover:underline">Chicago Events</a></li>
+          <li><a href="#" class="hover:underline">Washington Events</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">Contact Support</a></li>
+          <li><a href="#" class="hover:underline">Contact Sales</a></li>
+          <li><a href="#" class="hover:underline">Facebook</a></li>
+          <li><a href="#" class="hover:underline">LinkedIn</a></li>
+          <li><a href="#" class="hover:underline">Instagram</a></li>
+          <li><a href="#" class="hover:underline">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="mt-8 text-center border-t border-purple-700 pt-4 text-sm">
+      <p>© 2024 Eventbrite</p>
+      <p>
+        <a href="#" class="hover:underline">About</a> · 
+        <a href="#" class="hover:underline">Careers</a> · 
+        <a href="#" class="hover:underline">Terms</a> · 
+        <a href="#" class="hover:underline">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+<script>
+    let currentIndex = 0;
+
+    const slider = document.getElementById("slider");
+    const items = slider.querySelector(".slider-items");
+    const totalSlides = items.children.length;
+
+    function showNextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        items.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setInterval(showNextSlide, 5000);
+
+</script>
+
+{% endblock %}

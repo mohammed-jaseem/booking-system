@@ -4,29 +4,55 @@ from django.contrib.auth import authenticate,login as auth_login,logout as auth_
 from django.contrib.auth.decorators import login_required
 from .models import *
 
+
 @login_required(login_url='/login')
 def index(request):
     return render(request, 'web/index.html')
 
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password') 
+
+        user = authenticate(request, email=email, password=password,) 
+
+        if user is not None:
+            auth_login(request, user)
+            return HttpResponseRedirect(reverse('web:index'))
+        else:
+            context = {
+                'error':True,
+                'message':'Invalid email or password'
+            }
+            return render(request, 'web/login.html', context=context)
+    else:
+        return render(request, 'web/login.html')
+
 def register(request):
-    if request.method == "POST":
-        name = request.POST['name']
-        email = request.POST['email']
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
-        if password != confirm_password:
-            messages.error(request, "Passwords do not match!")
-            return render(request, "register.html")
-
-        if User.objects.filter(username=email).exists():
-            messages.error(request, "Email is already taken!")
-            return render(request, "register.html")
-
-        user = User.objects.create_user(username=email, password=password, first_name=name, email=email)
+        user = User.objects.create_user(
+            first_name=first_name, 
+            last_name=last_name,
+            email=email,
+            password=password,
+            is_customer=True
+        )
         user.save()
-        messages.success(request, "Registration successful!")
-        return redirect('login')
+        customer = Customer.objects.create(
+            user=user
+        )
+        customer.save()
+        return HttpResponseRedirect(reverse('web:login'))
+    else:
+        return render(request, 'web/register.html')
+    
+def logout(request):
+    user = request.user
+    auth_logout(request)
 
-    return render(request, "register.html")
-
+    return HttpResponseRedirect(reverse('web:login'))

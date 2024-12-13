@@ -4,52 +4,22 @@
 
 {% block container %}
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-sm w-full">
-        <h1 class="text-2xl font-bold mb-4 text-center">Register</h1>
-        <form id="registerForm" method="POST">
+<section 
+    class="h-screen w-full bg-cover bg-center flex items-center justify-center" 
+    style="background-image: url('{% static '/images/bg1.jpg' %}');">
+    <div class="bg-white bg-opacity-90 p-10 rounded-lg shadow-lg text-center">
+        <h1 class="text-[32px] font-semibold mb-5">SIGN UP NOW</h1>
+        <p class="w-[90%] md:w-[70%] m-auto mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sed quisquam fugiat ipsa ea eaque!</p>
+        <form action="" method="post" class="w-[90%] md:w-[70%] m-auto">
             {% csrf_token %}
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="name" name="name" type="text" placeholder="Enter your name" required>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email" name="email" type="email" placeholder="Enter your email" required>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password" name="password" type="password" placeholder="Enter your password" required>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">Confirm Password</label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="confirm_password" name="confirm_password" type="password" placeholder="Confirm your password"
-                    required>
-            </div>
-            <div class="flex items-center justify-between">
-                <button
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit">
-                    Register
-                </button>
-            </div>
+            <input required type="text" name="first_name" placeholder="Enter your first name" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <input required type="text" name="last_name" placeholder="Enter your last name" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <input required type="email" name="email" placeholder="Enter your email" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <input required type="password" name="password" placeholder="Enter your password" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <button type="submit" class="py-3 px-5 bg-red-500 text-white text-[14px] font-semibold rounded-xl">SIGN UP</button>
         </form>
-        <p id="errorMsg" class="text-red-500 text-sm mt-4 hidden"></p>
+        <p class="text-[14px] mt-5">Already have an account? <a class="text-red-500" href="{% url 'web:login' %}">Login</a></p>
     </div>
-    <div class="mb-4">
-        {% if messages %}
-            {% for message in messages %}
-                <p class="text-{{ message.tags }}-500 text-sm">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-    </div>
+</section>
 
 {% endblock %}
