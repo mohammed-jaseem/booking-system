@@ -1,0 +1,125 @@
+{% extends 'base/web-base.html' %}
+
+{% block container %}
+
+{% load static %}
+
+{% include 'include/header.html' %}
+
+<div class="flex items-center justify-center min-h-screen bg-gray-100 pt-[100px] bg-cover bg-center bg-no-repeat pb-[100px]" 
+    style="background-image: url('{% static 'images/bg2.jpg' %}');">
+    <div class="bg-white shadow-md rounded-lg w-full max-w-2xl p-6">
+        <h1 class="text-2xl font-bold text-center mb-4">Event Form</h1>
+        <form id="eventForm" class="space-y-4">
+            <!-- Name -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" required 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" required rows="3" 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+            </div>
+
+            <!-- Image -->
+            <div>
+                <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+                <input type="file" id="image" name="image" accept="image/*" 
+                    class="w-full mt-1 px-3 py-2 border rounded-md">
+            </div>
+
+            <!-- Max Attendees -->
+            <div>
+                <label for="maxAttendees" class="block text-sm font-medium text-gray-700">Max Attendees</label>
+                <input type="number" id="maxAttendees" name="maxAttendees" required 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Time & Date -->
+            <div>
+                <label for="timeDate" class="block text-sm font-medium text-gray-700">Time & Date</label>
+                <input type="datetime-local" id="timeDate" name="timeDate" required 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Place -->
+            <div>
+                <label for="place" class="block text-sm font-medium text-gray-700">Place</label>
+                <input type="text" id="place" name="place" required 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Guests -->
+            <div>
+                <label for="guests" class="block text-sm font-medium text-gray-700">Guests</label>
+                <input type="text" id="guests" name="guests" placeholder="e.g., John, Jane" 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Actual Ticket Amount -->
+            <div>
+                <label for="actualAmount" class="block text-sm font-medium text-gray-700">Actual Ticket Amount (₹)</label>
+                <input type="number" id="actualAmount" name="actualAmount" required 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Offer Ticket Amount -->
+            <div>
+                <label for="offerAmount" class="block text-sm font-medium text-gray-700">Offer Ticket Amount (₹)</label>
+                <input type="number" id="offerAmount" name="offerAmount" required 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Enquiry Number -->
+            <div>
+                <label for="enquiryNumber" class="block text-sm font-medium text-gray-700">Enquiry Number</label>
+                <input type="tel" id="enquiryNumber" name="enquiryNumber" required 
+                    class="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <!-- Tax -->
+            <div>
+                <p class="text-gray-700">
+                    <strong>Tax:</strong> 5% will be added to the ticket amount.
+                </p>
+            </div>
+
+            <!-- Fixed Payment -->
+            <div>
+                <p class="text-gray-700">
+                    <strong>Fixed Payment:</strong> ₹50
+                </p>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white font-bold rounded-md 
+                    hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('eventForm');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Calculate tax and total amount
+        const actualAmount = parseFloat(document.getElementById('actualAmount').value) || 0;
+        const offerAmount = parseFloat(document.getElementById('offerAmount').value) || 0;
+        const tax = offerAmount * 0.05;
+        const total = offerAmount + tax + 50;
+
+        alert(`Total amount to be paid: ₹${total.toFixed(2)} (including ₹50 payment and 5% tax)`);
+    });
+</script>
+
+{% endblock %}

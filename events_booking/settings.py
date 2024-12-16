@@ -58,7 +58,7 @@ WSGI_APPLICATION = 'events_booking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'bookings',
+        'NAME':'system',
         'HOST':'localhost',
         'USER':'jaseem',
         'PASSWORD':'1234',

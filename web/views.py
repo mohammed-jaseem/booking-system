@@ -7,7 +7,12 @@ from .models import *
 
 @login_required(login_url='/login')
 def index(request):
-    return render(request, 'web/index.html')
+    sliders = Slider.objects.all()
+
+    context = {
+       'sliders': sliders
+    }
+    return render(request, 'web/index.html', context=context)
 
 def login(request):
     if request.method == 'POST':
@@ -56,3 +61,31 @@ def logout(request):
     auth_logout(request)
 
     return HttpResponseRedirect(reverse('web:login'))
+
+def events(request):
+    events = [
+        {
+            "name": "Tech Conference",
+            "description": "A conference about the latest in technology.",
+            "timeDate": "2024-12-25 10:00",
+            "place": "Convention Center, City",
+            "maxAttendees": 300,
+            "actualAmount": 1500,
+            "offerAmount": 1200,
+        },
+        {
+            "name": "Music Festival",
+            "description": "Join us for an evening of music and fun.",
+            "timeDate": "2024-12-31 18:00",
+            "place": "Open Grounds, Downtown",
+            "maxAttendees": 500,
+            "actualAmount": 2000,
+            "offerAmount": 1800,
+        },
+    ]
+    return render(request, 'web/create-form.html', {"events": events})
+
+
+
+
+

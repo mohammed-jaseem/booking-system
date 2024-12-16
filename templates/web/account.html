@@ -1,0 +1,82 @@
+{% extends 'base/web-base.html' %}
+
+{% block container %}
+
+{% load static %}
+
+{% include 'include/header.html' %}
+
+<div class="max-w-7xl mx-auto mt-12">
+    <h1 class="text-4xl font-bold text-center mb-8">My Account</h1>
+
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Created Events</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for event in created_events %}
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img class="w-full h-48 object-cover" src="{{ event.image.url }}" alt="Event Image">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-2">{{ event.name }}</h3>
+                    <p class="text-gray-600 mb-4">{{ event.description }}</p>
+                    <p><strong>Date:</strong> {{ event.date }}</p>
+                    <p><strong>Location:</strong> {{ event.location }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-gray-600">You haven't created any events yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <h2 class="text-2xl font-semibold mb-4">Booked Events</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Example Booked Event Card -->
+            {% for booking in booked_events %}
+            <div class="bg-white shadow-md rounded-lg overflow-hidden relative">
+                <img class="w-full h-48 object-cover" src="{{ booking.event.image.url }}" alt="Event Image">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-2">{{ booking.event.name }}</h3>
+                    <p class="text-gray-600 mb-4">{{ booking.event.description }}</p>
+                    <p><strong>Date:</strong> {{ booking.event.date }}</p>
+                    <p><strong>Location:</strong> {{ booking.event.location }}</p>
+                </div>
+                <button 
+                    class="absolute top-2 right-2 bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded cancel-booking"
+                    data-booking-id="{{ booking.id }}">
+                    Cancel
+                </button>
+            </div>
+            {% empty %}
+            <p class="text-gray-600">You haven't booked any events yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
+<script>
+    // JavaScript to handle booking cancellation
+    document.querySelectorAll('.cancel-booking').forEach(button => {
+        button.addEventListener('click', () => {
+            const bookingId = button.getAttribute('data-booking-id');
+            if (confirm('Are you sure you want to cancel this booking?')) {
+                fetch(`/cancel-booking/${bookingId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        button.closest('div').remove(); 
+                        alert('Booking successfully canceled.');
+                    } else {
+                        alert('Failed to cancel booking.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+{% endblock %}
