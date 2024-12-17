@@ -30,25 +30,24 @@ class Slider(models.Model):
         return self.title
     
 
+
 class Event(models.Model):
-    name = models.CharField(max_length=255, verbose_name="Event Name")
-    description = models.TextField(verbose_name="Description")
-    image = models.ImageField(upload_to='event_images/', blank=True, null=True, verbose_name="Event Image")
-    max_attendees = models.PositiveIntegerField(verbose_name="Max Attendees")
-    time_date = models.DateTimeField(verbose_name="Event Date & Time")
-    place = models.CharField(max_length=255, verbose_name="Event Place")
-    guests = models.TextField(blank=True, null=True, verbose_name="Guest Names (Comma-separated)")
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to='event_images')
+    max_attendees = models.PositiveIntegerField()
+    time_date = models.DateTimeField()
+    place = models.CharField(max_length=255)
+    guests = models.TextField()
     actual_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Actual Ticket Amount")
     offer_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Offer Ticket Amount")
-    enquiry_number = models.CharField(max_length=15, verbose_name="Enquiry Number")
-
+    enquiry_number = models.CharField()
 
     class Meta:
         db_table = "event"
         verbose_name = "event"
         verbose_name_plural = "events"
         ordering = ["-id"]
-
 
     def __str__(self):
         return self.name

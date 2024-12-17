@@ -7,10 +7,12 @@ from .models import *
 
 @login_required(login_url='/login')
 def index(request):
+    events = Event.objects.all()
     sliders = Slider.objects.all()
 
     context = {
-       'sliders': sliders
+       'sliders': sliders,
+        'events': events
     }
     return render(request, 'web/index.html', context=context)
 
@@ -62,29 +64,38 @@ def logout(request):
 
     return HttpResponseRedirect(reverse('web:login'))
 
-def events(request):
-    events = [
-        {
-            "name": "Tech Conference",
-            "description": "A conference about the latest in technology.",
-            "timeDate": "2024-12-25 10:00",
-            "place": "Convention Center, City",
-            "maxAttendees": 300,
-            "actualAmount": 1500,
-            "offerAmount": 1200,
-        },
-        {
-            "name": "Music Festival",
-            "description": "Join us for an evening of music and fun.",
-            "timeDate": "2024-12-31 18:00",
-            "place": "Open Grounds, Downtown",
-            "maxAttendees": 500,
-            "actualAmount": 2000,
-            "offerAmount": 1800,
-        },
-    ]
-    return render(request, 'web/create-form.html', {"events": events})
 
+def create_event(request):
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+        max_attendees = request.POST.get('max_attendees')
+        time_date = request.POST.get('time_date')
+        place = request.POST.get('place')
+        guests = request.POST.get('guests')
+        actual_amount = request.POST.get('actual_amount')
+        offer_amount = request.POST.get('offer_amount')
+        enquiry_number = request.POST.get('enquiry_number')
+
+        event = Event.objects.create(
+            name=name,
+            description=description,
+            image=image,
+            max_attendees=max_attendees,
+            time_date=time_date,
+            place=place,
+            guests=guests,
+            actual_amount=actual_amount,
+            offer_amount=offer_amount,
+            enquiry_number=enquiry_number,
+        )
+        event.save()
+
+        return redirect('web:index')
+
+    return render(request, 'web/create-form.html')
 
 
 
