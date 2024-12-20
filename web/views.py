@@ -7,7 +7,7 @@ from .models import *
 
 @login_required(login_url='/login')
 def index(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(is_approved=True)
     sliders = Slider.objects.all()
 
     context = {
@@ -66,7 +66,7 @@ def logout(request):
 
 
 def create_event(request):
-
+    events = Event.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('description')
@@ -94,8 +94,27 @@ def create_event(request):
         event.save()
 
         return redirect('web:index')
+    
+    context = {
+        events
+    }
 
-    return render(request, 'web/create-form.html')
+    return render(request, 'web/create-form.html', context=context)
+
+def detailes(request, id):
+    event = Event.objects.get(id=id)
+
+    context = {
+        'event': event
+    }
+
+    return render(request, 'web/detailes.html', context=context)
+
+def booking(request):
+    return render(request, 'web/booking.html',)
+
+
+
 
 
 

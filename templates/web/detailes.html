@@ -1,0 +1,40 @@
+{% extends 'base/web-base.html' %}
+
+{% block container %}
+
+{% load static %}
+
+{% include 'include/header.html' %}
+
+<div class="flex items-center justify-center min-h-screen bg-gray-100 px-4 py-8">
+    <div class="container mx-auto max-w-5xl bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="h-64 md:h-auto">
+                <img src="{{ event.image.url }}" alt="{{ event.name }}" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex flex-col justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-4">{{ event.name }}</h1>
+                    <p class="text-gray-600 mb-4">{{ event.description|truncatewords:20 }}</p>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p><span class="font-semibold"><span class="font-semibold">Date & Time:</span> {{ event.time_date|date:"D, M j, Y H:i" }}</p>
+                        <p><span class="font-semibold"><span class="font-semibold">Place:</span> {{ event.place }}</p>
+                        <p><span class="font-semibold"><span class="font-semibold">Max Attendees:</span> {{ event.max_attendees }}</p>
+                        <p><span class="font-semibold"><span class="font-semibold">Price:</span> ₹{{ event.offer_amount }}
+                            <span class="line-through text-gray-400">₹{{ event.actual_amount }}</span>
+                        </p>
+                        <p><span class="font-semibold">Tax:</span> 5%</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <a href="" 
+                       class="w-full px-4 py-2 bg-blue-500 text-white font-bold rounded-md text-center hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 block">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

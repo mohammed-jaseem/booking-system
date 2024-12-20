@@ -42,6 +42,8 @@ class Event(models.Model):
     actual_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Actual Ticket Amount")
     offer_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Offer Ticket Amount")
     enquiry_number = models.CharField()
+    is_approved = models.BooleanField(default=False)
+    is_actived = models.BooleanField(default=True)
 
     class Meta:
         db_table = "event"

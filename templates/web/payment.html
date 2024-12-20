@@ -1,0 +1,29 @@
+{% extends 'base/web-base.html' %}
+
+{% block container %}
+
+{% load static %}
+
+{% include 'include/header.html' %}
+
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h1 class="text-xl font-bold mb-4 text-gray-800">Complete Payment</h1>
+        <p class="text-gray-600 mb-4">Pay ₹50 admin fee to create the event.</p>
+
+        <form id="razorpay-form">
+            <script 
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="{{ razorpay_key }}"
+                data-amount="{{ amount|floatformat:2 }}" 
+                data-currency="INR"
+                data-order_id="{{ order_id }}"
+                data-buttontext="Pay ₹50"
+                data-name="Event Platform"
+                data-description="Admin Fee for Event Creation"
+                data-theme.color="#1a56db"
+            ></script>
+        </form>
+    </div>
+</div>
+{% endblock %}
