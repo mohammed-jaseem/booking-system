@@ -10,5 +10,6 @@ urlpatterns = [
     path('create-form/', views.create_event, name='create-form'),
     path("logout/", views.logout, name="logout"),
     path("detailes/<int:id>/", views.detailes, name="detailes"),
-    path("booking/", views.booking, name="booking"),
+    path('booking/<int:id>/', views.booking_event, name='booking_event'),
+    path('booking-success/<int:id>/', views.booking_success, name='booking_success'),
     ]

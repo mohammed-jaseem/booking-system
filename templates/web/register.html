@@ -1,25 +1,31 @@
 {% extends 'base/web-base.html' %}
-
 {% load static %}
 
 {% block container %}
-
 <section 
     class="h-screen w-full bg-cover bg-center flex items-center justify-center" 
-    style="background-image: url('{% static '/images/bg1.jpg' %}');">
+    style="background-image: url('{% static "images/bg2.jpg" %}');">
     <div class="bg-white bg-opacity-90 p-10 rounded-lg shadow-lg text-center">
         <h1 class="text-[32px] font-semibold mb-5">SIGN UP NOW</h1>
         <p class="w-[90%] md:w-[70%] m-auto mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sed quisquam fugiat ipsa ea eaque!</p>
         <form action="" method="post" class="w-[90%] md:w-[70%] m-auto">
             {% csrf_token %}
-            <input required type="text" name="first_name" placeholder="Enter your first name" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
-            <input required type="text" name="last_name" placeholder="Enter your last name" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
-            <input required type="email" name="email" placeholder="Enter your email" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
-            <input required type="password" name="password" placeholder="Enter your password" class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
-            <button type="submit" class="py-3 px-5 bg-red-500 text-white text-[14px] font-semibold rounded-xl">SIGN UP</button>
+            <input required type="text" name="first_name" placeholder="Enter your first name" 
+                   class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <input required type="text" name="last_name" placeholder="Enter your last name" 
+                   class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <input required type="email" name="email" placeholder="Enter your email" 
+                   class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <input required type="password" name="password" placeholder="Enter your password" 
+                   class="w-full outline-none border py-3 px-5 rounded-2xl mb-5">
+            <button type="submit" class="py-3 px-5 bg-red-500 text-white text-[14px] font-semibold rounded-xl">
+                SIGN UP
+            </button>
         </form>
-        <p class="text-[14px] mt-5">Already have an account? <a class="text-red-500" href="{% url 'web:login' %}">Login</a></p>
+        
+        <p class="text-[14px] mt-5">Already have an account? 
+            <a class="text-red-500" href="{% url 'web:login' %}">Login</a>
+        </p>
     </div>
 </section>
-
 {% endblock %}

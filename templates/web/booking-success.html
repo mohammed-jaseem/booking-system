@@ -1,0 +1,32 @@
+{% extends 'base/web-base.html' %}
+
+{% block container %}
+
+{% load static %}
+
+{% include 'include/header.html' %}
+
+<div class="flex justify-center items-center min-h-screen bg-gray-100 px-4 py-8">
+<div class="container mx-auto max-w-5xl bg-white shadow-lg rounded-lg overflow-hidden text-center">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Booking Successful!</h1>
+    <p class="text-lg text-gray-600 mb-4">Thank you for booking your ticket for {{ booking.event.name }}!</p>
+    
+    <div class="space-y-4 text-gray-700">
+        <h1 class="text-3xl font-bold text-green-600">Booking Successful!</h1>
+        <p class="text-lg mt-4">Your booking for {{ booking.event.name }} has been confirmed.</p>
+        <p class="mt-2">Ticket Type: {{ booking.ticket_type }}</p>
+        <p class="mt-2">Quantity: {{ booking.quantity }}</p>
+        <p class="mt-2 text-xl font-bold">Total Price: ₹{{ booking.total_price }}</p>
+    </div>
+    
+    <div class="mt-6">
+    <p class="text-gray-600">You will receive an email with your ticket details shortly.</p>
+    </div>
+    
+    <div class="mt-8">
+        <a href="{% url 'booking_event' booking.event.id %}" class="text-blue-500 hover:text-blue-700">Go back to Event Details</a>
+    </div>
+</div>
+</div>
+
+{% endblock %}

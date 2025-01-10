@@ -38,7 +38,6 @@
                         <span class="line-through text-gray-400">₹{{ event.actual_amount }}</span>
                     </p>
                     <p class="text-sm text-gray-500"><span class="font-semibold">Tax:</span> 5% </p>
-                    <p><span class="font-semibold">Total Amount:</span> ₹{{ event.get_total_amount }}</p>
                     <a href="{% url 'web:detailes' id=event.id %}" class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-semibold text-sm border-b-2 border-transparent hover:border-blue-600 transition-colors">
                       View More
                     </a>                

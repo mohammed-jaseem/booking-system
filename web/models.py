@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from django.utils.timezone import now
 
 
 class Customer(models.Model):
@@ -53,5 +54,22 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+class Booking(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    ticket_type = models.CharField(max_length=50)
+    quantity = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    place = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = "booking"
+        verbose_name = "booking"
+        verbose_name_plural = "bookings"
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.event.name
+    
 
     
