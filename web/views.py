@@ -136,11 +136,11 @@ def booking_event(request, id):
 
             if quantity <= 0:
                 messages.error(request, "Quantity must be greater than zero.")
-                return redirect('booking_event', id=id)
+                return redirect('booking_event')
             
             if quantity > 10:
                 messages.warning(request, f"You entered a high quantity ({quantity}). Please confirm your booking.")
-                return redirect('booking_event', id=id)
+                return redirect('booking_event')
 
             total_price = (event.offer_amount * quantity) * 2
 
@@ -151,14 +151,15 @@ def booking_event(request, id):
                 total_price=total_price
             )
 
-            return redirect('booking_success', id=booking.id)
+            return redirect('booking_success')
         
         except ValueError:
             messages.error(request, "Invalid input for quantity.")
-            return redirect('booking_event', id=id)
+            return redirect('booking_event')
     
     context = {
-        'event': event
+        'event': event,
+        'booking': booking
     }
     
     return render(request, 'web/booking.html', context=context)
@@ -167,8 +168,11 @@ def booking_event(request, id):
 
 def booking_success(request, id):
     booking = Booking.objects.get(id=id)
+    event = Event.objects.all()
+
     context = {
-        'booking': booking
+        'booking': booking,
+        'event': event
     }
     return render(request, 'web/booking-success.html', context=context)
 
